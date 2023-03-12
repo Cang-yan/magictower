@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.yibingo.race</groupId>
+		<artifactId>yibingo</artifactId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>yibingo-core</artifactId>
+	<description>业务逻辑核心</description>
+
+
+
+	<dependencies>
+		<dependency>
+			<groupId>com.yibingo.race</groupId>
+			<artifactId>yibingo-common</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.yibingo.race</groupId>
+			<artifactId>yibingo-dal</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.yibingo.race</groupId>
+			<artifactId>yibingo-ocr</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.yibingo.race</groupId>
+			<artifactId>yibingo-storage</artifactId>
+		</dependency>
+
+		<!--rabbitmq-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-amqp</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.yibingo.race</groupId>
+			<artifactId>yibingo-quartz</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.baidu.xuper</groupId>
+			<artifactId>xasset-sdk-java</artifactId>
+			<version>1.0.5</version>
+		</dependency>
+		<dependency>
+			<groupId>com.baidu.xuper</groupId>
+			<artifactId>xuper-java-sdk</artifactId>
+			<version>0.2.0</version>
+		</dependency>
+	</dependencies>
+
+
+</project>

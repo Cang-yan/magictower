@@ -1,0 +1,111 @@
+server:
+  #  tomcat:
+  #    uri-encoding: UTF-8
+  #    max-threads: 1000
+  #    min-spare-threads: 30
+  port: 10584
+  #  connection-timeout: 5000ms
+#  配置https
+  ssl:
+
+    key-store: classpath:ssl.jks
+
+    key-store-password: Wt9$jvu@lUjExP#N
+
+    keyStoreType: JKS
+
+
+
+spring:
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    #url: jdbc:mysql://172.17.0.2:3306/metaWinTest?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false
+    url: jdbc:mysql://114.116.126.131:10257/meta_win_test?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false
+    username: root
+    password: metaNMSL666
+    initial-size: 10
+    max-active: 100
+    min-idle: 10
+    max-wait: 60000
+    pool-prepared-statements: true
+    max-pool-prepared-statement-per-connection-size: 20
+    time-between-eviction-runs-millis: 60000
+    min-evictable-idle-time-millis: 300000
+    #Oracle需要打开注释
+    #validation-query: SELECT 1 FROM DUAL
+    test-while-idle: true
+    test-on-borrow: false
+    test-on-return: false
+    stat-view-servlet:
+      enabled: true
+      url-pattern: /druid/*
+      #login-username: admin
+      #login-password: admin
+    filter:
+      stat:
+        log-slow-sql: true
+        slow-sql-millis: 1000
+        merge-sql: false
+      wall:
+        config:
+          multi-statement-allow: true
+
+  redis:
+    host: 114.116.126.131
+    port: 24089
+    password: metaNMSL666
+    database: 0
+  ##多数据源的配置
+  #dynamic:
+  #  datasource:
+  #    slave1:
+  #      driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+  #      url: jdbc:sqlserver://localhost:1433;DatabaseName=renren_security
+  #      username: sa
+  #      password: 123456
+  #    slave2:
+  #      driver-class-name: org.postgresql.Driver
+  #      url: jdbc:postgresql://localhost:5432/renren_security
+  #      username: renren
+  #      password: 123456
+
+  rabbitmq:
+    host: 114.116.126.131
+    port: 5762
+    username: root
+    password: METAwin
+    virtual-host: /
+
+    listener:
+      simple:
+        concurrency: 10
+        max-concurrency: 10
+        prefetch: 1
+        auto-startup: true
+        default-requeue-rejected: true
+
+    template:
+      retry:
+        enabled: true
+        initial-interval: 1000
+        max-attempts: 3
+        max-interval: 10000
+        multiplier: 1.0
+#支付宝支付
+alipay:
+  # 应用编号
+  appId: 2021000121633536
+  # 应用私钥
+  privateKey: MIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQCwDYh5oAeeBvD4R32PI0L8luNGmAXpwqIZFXLoM/5DIz3zbaRNqGYafSc3UX8et8T8nfXw6lz2Dh/ioIJb2Ik0/39nsV1V+wCtUaaipG+P1hl9XzU7LtDXqTI6YDM3Z8KNhdcvyyw6pElkOgcBUfyc4JrQO9BG1uW8l1VFpd/WHPUAHvaviyAEQheYEDuAQCSpNZXJH3oSGb9W7CwZiGG8GeXY3m2ARpZxrGB33vVHga/LF0y0+s41ArohlszoZtlF/WSoOMPVVGutBVbbaOYl0dKzqJ780PE0e+YfdbBYgeMCM8txYUB0lkuSiRDj/yLzkMD3NXYpNczGT1x3yTTtAgMBAAECggEAOeMpRbyd5JMptqljGqaghwdiEbs47oUF4bOQxdMavp6e5yTdCn/dmsYeF+1fHA2W4u1Zie61xF4ek9jtJCAN9XQxQzopk3Tl4xde8EmbOTNPzE565UvedZr3ngQ1svkWGoywldF7aIjObPs7hG6d3kNoBCI2uKQ+hAVKj40cDX2KMtH2GarqLOMXWz1+DrEPhY8Vwl/nP8x2ceH3hIHy/r/pRGOCQ/tBVVd0c+L8XRL3OhRSgj9xLegWxTub9P5trGK3ncRaWCfM+PIcxWE2dJjy0DWbxVkeemEc0/a/sD7ISY1gf57tcMDJOko6icrULgB2jvdBRlBsJvKjAIzZoQKBgQDfZLnbKZC1oBwYHeUFfvfDdyouggYSiJQ/AtZx41DRVfd43leCxDukRVb4y3tbbu1LKEe0EP3Hwc24R2/Jb9N+mQ1gNR20Sm7nDMsYg+CaxorhKJxOhkYtZGTH6zzJ9qF0ohDBvQ6iDtwf8niwaMsRhaOg0Xsiq9eQuerzuWvgiQKBgQDJv+NbLiZfgvYzxMO1sCE1h4yCqtXDxrrsHFboXAyKfIFkt/Fdbd3n0ZXnRXfggcf74+4VwMANbmeGP/Vpp52NFYweiDqBZ8cgtQEj5DPXl8j20+0hOqUXwx9QCg27hQwnnWfPX8S2bB2tO+xAjD8nAVwvInyhhaPed01Np7wwRQKBgQCK4QzmYk3TjElK+PLTWt7fRusTZMQvq3c2QSZeQSqSKbajDt8qraJCetUZ8S6sZibhrZX+LP4IvMSPBuJJQdsi/jWhlQP1fLy7qWltwTbWIg5e8idSbgmc2KgK3YS6Ljir0MFIIKfDOifBOLWtPkjYiNNz/CdoI5rtH5ggkyqsuQKBgQDFL/cQ7Jd27PKkgKHk2CRtRHISWNUcSAX0tnI/I5DiXnS9s4eGkNa+OLwyUlSrq02CpjHTMxTDS/CFZ8f/H2O/PJs6UF4Wkw8uqZtWsDn3c5Rpo5N20fIAuqbFPT5U1OKfaZrINkt3HU8YPaRZJnqnLg4ix6tW197llmeJCfPGnQKBgQDWtjhMh3WWZVFN+ZH5RHKDHmOdUiiZBziHsWefd3f+kCLMdk1K60Arc2Zc8aMCYUURNWb7ZuBtRjnON5UVkYf0EGlAZqHV+5MEcDMm1Bc2+bd5MYP51rmw2oYBWXcfqjg63v1BxLpW2RgDJthw6vNwU+Ka6aDOCr9106V5zgwcaQ==
+  # 支付宝公钥，通过应用公钥上传到支付宝开放平台换取支付宝公钥(如果是证书模式，公钥与私钥在CSR目录)。
+  publicKey:
+  # 应用公钥证书
+  appCertPath: /opt/alipay/appCertPublicKey.crt
+  # 支付宝公钥证书 绝对路径吗
+  aliPayCertPath: /opt/alipay/alipayCertPublicKey_RSA2.crt
+  # 支付宝根证书
+  aliPayRootCertPath: /opt/alipay/alipayRootCert.crt
+  # 支付宝支付网关，沙箱环境时设置为 https://openapi.alipaydev.com/gateway.do 使用正式环境时设置为 https://openapi.alipay.com/gateway.do
+  serverUrl: https://openapi.alipaydev.com/gateway.do
+  # 外网访问项目的域名，支付通知中会使用
+  domain: https;//www.meta-artwork.com:10584

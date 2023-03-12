@@ -1,0 +1,94 @@
+server:
+    #  tomcat:
+    #    uri-encoding: UTF-8
+    #    max-threads: 1000
+    #    min-spare-threads: 30
+    port: 9418
+    #  connection-timeout: 5000ms
+#  配置https
+#    ssl:
+#
+#        key-store: classpath:server_ssl.jks
+#
+#        key-store-password: mVr79x1a
+#
+#        keyStoreType: JKS
+
+
+
+spring:
+    datasource:
+        driverClassName: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://114.116.126.131:10257/meta_win?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false
+        username: root
+        password: metaNMSL666
+        initial-size: 10
+        max-active: 100
+        min-idle: 10
+        max-wait: 60000
+        pool-prepared-statements: true
+        max-pool-prepared-statement-per-connection-size: 20
+        time-between-eviction-runs-millis: 60000
+        min-evictable-idle-time-millis: 300000
+        #Oracle需要打开注释
+        #validation-query: SELECT 1 FROM DUAL
+        test-while-idle: true
+        test-on-borrow: false
+        test-on-return: false
+        stat-view-servlet:
+            enabled: true
+            url-pattern: /druid/*
+            #login-username: admin
+            #login-password: admin
+        filter:
+            stat:
+                log-slow-sql: true
+                slow-sql-millis: 1000
+                merge-sql: false
+            wall:
+                config:
+                    multi-statement-allow: true
+
+    redis:
+        host: 114.116.126.131
+        port: 24089
+        password: metaNMSL666
+        database: 1
+
+    ##多数据源的配置
+#dynamic:
+#  datasource:
+#    slave1:
+#      driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+#      url: jdbc:sqlserver://localhost:1433;DatabaseName=renren_security
+#      username: sa
+#      password: 123456
+#    slave2:
+#      driver-class-name: org.postgresql.Driver
+#      url: jdbc:postgresql://localhost:5432/renren_security
+#      username: renren
+#      password: 123456
+
+
+    rabbitmq:
+        host: 114.116.126.131
+        port: 5762
+        username: root
+        password: METAwin
+        virtual-host: /
+
+        listener:
+            simple:
+                concurrency: 10
+                max-concurrency: 10
+                prefetch: 1
+                auto-startup: true
+                default-requeue-rejected: true
+
+        template:
+            retry:
+                enabled: true
+                initial-interval: 1000
+                max-attempts: 3
+                max-interval: 10000
+                multiplier: 1.0

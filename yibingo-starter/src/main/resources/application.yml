@@ -1,0 +1,122 @@
+spring:
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+  time-zone: GMT+8
+
+  # 设置上传文件的大小
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 931775308
+      max-request-size: 1000MB
+#spring:
+#  # 环境 dev|test|prod
+#  profiles:
+#    active: dev
+# jackson时间格式化
+
+#  jackson:
+#    time-zone: GMT+8
+#    date-format: yyyy-MM-dd HH:mm:ss
+
+#  servlet:
+#    multipart:
+#      max-file-size: 100MB
+#      max-request-size: 100MB
+#      enabled: true
+#  redis:
+#    open: false  # 是否开启redis缓存  true开启   false关闭
+#    database: 0
+#    host: localhost
+#    port: 6379
+#    password:    # 密码（默认为空）
+#    timeout: 6000ms  # 连接超时时长（毫秒）
+#    jedis:
+#      pool:
+#        max-active: 1000  # 连接池最大连接数（使用负值表示没有限制）
+#        max-wait: -1ms      # 连接池最大阻塞等待时间（使用负值表示没有限制）
+#        max-idle: 10      # 连接池中的最大空闲连接
+#        min-idle: 5       # 连接池中的最小空闲连接
+#  mvc:
+#    throw-exception-if-no-handler-found: true
+#  resources:
+#    add-mappings: false
+
+
+#mybatis
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/**/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+
+renren:
+  redis:
+    open: false
+  shiro:
+    redis: false
+  # APP模块，是通过jwt认证的，如果要使用APP模块，则需要修改【加密秘钥】
+  jwt:
+    # 加密秘钥
+    secret: f4e2e52034348f86b67cde581c0f9eb5[www.renren.io]
+    # token有效时长，3天，单位秒
+    expire: 259200
+    header: token
+
+#自定义参数，一些过期时间参数
+selfTime:
+  #短信验证码过期时间  5分钟
+  sms:
+    expirationMilliSeconds: 300000
+
+
+#微信相关参数
+weChat:
+  #小程序appid
+  appid: wxfdd42d32410de8d7
+  #小程序密钥
+  secret: 11b46596c5380dbd62aeb5038ac43724
+
+tx:
+  secretId: AKIDMVP3QiuqUrxmKbmnZ4IGxNVMZWBYpwpS
+  secretKey: RdbIkIPIxNuDG3btvhGckdHfojOnwrWw
+
+baidu:
+  appId: 26761298
+  apiKey: CS6o1UzYg1KBjXLZjwiIYjUt
+  secretKey: F9agAjzLGtsFliiz7nDMLwOrONGk1F18
+
+swagger:
+  # 全局统一鉴权配置
+  authorization:
+    key-name: GitsSessionID
+
+
+
+
+#sa-token配置
+sa-token:
+  # token名称 (同时也是cookie名称)
+  token-name: sa-token
+  # token有效期，单位s 默认30天, -1代表永不过期  此设置为五天
+  timeout: 432000
+  # token临时有效期,单位s 默认15分钟，15分钟不操作token过期  此设置为五天
+  activity-timeout: 432000
+  # 是否允许同一账号并发登录 (为true时允许一起登录, 为false时新登录挤掉旧登录)
+  is-concurrent: true
+  # 在多人登录同一账号时，是否共用一个token (为true时所有登录共用一个token, 为false时每次登录新建一个token)
+  is-share: true
+  # token风格
+  token-style: random-32
+  # 是否输出操作日志
+  is-log: false
+  # 是否从cookie里读取token
+  is-read-cookie: false
+  #是否从请求体里读取token
+  is-read-body: false
+
+
+
+
+
+

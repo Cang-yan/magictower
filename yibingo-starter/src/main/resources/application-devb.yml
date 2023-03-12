@@ -1,0 +1,116 @@
+server:
+  #  tomcat:
+  #    uri-encoding: UTF-8
+  #    max-threads: 1000
+  #    min-spare-threads: 30
+  port: 36751
+  #  connection-timeout: 5000ms
+#  配置https
+  ssl:
+
+    key-store: classpath:ssl.jks
+
+    key-store-password: Wt9$jvu@lUjExP#N
+
+    keyStoreType: JKS
+
+
+
+spring:
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://114.116.126.131:10257/meta_win?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false
+    username: root
+    password: metaNMSL666
+    initial-size: 10
+    max-active: 100
+    min-idle: 10
+    max-wait: 60000
+    pool-prepared-statements: true
+    max-pool-prepared-statement-per-connection-size: 20
+    time-between-eviction-runs-millis: 60000
+    min-evictable-idle-time-millis: 300000
+    #Oracle需要打开注释
+    #validation-query: SELECT 1 FROM DUAL
+    test-while-idle: true
+    test-on-borrow: false
+    test-on-return: false
+    stat-view-servlet:
+      enabled: true
+      url-pattern: /druid/*
+      #login-username: admin
+      #login-password: admin
+    filter:
+      stat:
+        log-slow-sql: true
+        slow-sql-millis: 1000
+        merge-sql: false
+      wall:
+        config:
+          multi-statement-allow: true
+
+
+  redis:
+    host: 114.116.126.131
+    port: 24089
+    password: metaNMSL666
+    database: 1
+
+
+
+  ##多数据源的配置
+#dynamic:
+#  datasource:
+#    slave1:
+#      driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+#      url: jdbc:sqlserver://localhost:1433;DatabaseName=renren_security
+#      username: sa
+#      password: 123456
+#    slave2:
+#      driver-class-name: org.postgresql.Driver
+#      url: jdbc:postgresql://localhost:5432/renren_security
+#      username: renren
+#      password: 123456
+
+  rabbitmq:
+    host: 114.116.126.131
+    port: 5762
+    username: root
+    password: METAwin
+    virtual-host: /
+
+    listener:
+      simple:
+        concurrency: 10
+        max-concurrency: 10
+        prefetch: 1
+        auto-startup: true
+        default-requeue-rejected: true
+
+    template:
+      retry:
+        enabled: true
+        initial-interval: 1000
+        max-attempts: 3
+        max-interval: 10000
+        multiplier: 1.0
+
+
+#支付宝支付
+alipay:
+  # 应用编号
+  appId: 2021003139652745
+  # 应用私钥
+  privateKey: MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCBxyesORkI+yTmOrtLXwTNWZPWaddmvnpAEC2KGaGFVWp4z4ZkM7vF1b14uu0kG650aIzRedTDXsUyDeBgU9gnFhfSVH1puMHqz0ppgRRwSOYGYxWN20WyjbqtlMwXBcE+Oisl5Oj8L4dH42/45AKrUkcDeAWbx7hB/kyE/KdLQ+wc+FvEdNZZltXhg49pNop+IrB0tBILbI9FgioKl4XwFJAsdtXgNd06G4QFCAM1Yl5Sq7scXKzOt+h9LUwbmGIDVdyhEzUT+jFvbN3/aMhP3K5N9xlrKItQDD4mNcSdjq+HIq7IMlhpvJmE5YOYSSDt2mqq4uWLF/W1I9hTEtFXAgMBAAECggEACIjmbQccRGDv3kxCgQRwtmiLtnAjgFhKhegKdqiU3MXvSJ6tQe29DZeu7D+u1M8VPAacLDKM8YRMB6yt8ufQsVFco7J2xPsnlZ+oTyP0CiZhKk5d3oRrIwD7I+tDOMhiGwuMRuO1BtDBXtLwTDgCjO3OScYc6E/MKFrnAV/0SJjIKWUT6KUmRonbBLrEx4lEaO2MEosVz8a05avVJLHogIEHQQs7HbXzFK7/KLSaLGnIqj7YObmVUu2EMezNj3d/rdhQnCmaRvVaVENJno8MI+WSyiH4YU1B+K80jzeuwRGuSTt2b/AStH0xbXo5muf5Ld88UeU5EAYf9qeBBEydMQKBgQDr8hkWOdTJ04ULJ4QnKZcoBEWJQV0P4Zo7AAaE+ikVcrWVmwKQHdLR0HObPGhX/7dKYKHObUNZMct+dVfjzan/qQrlYD0OmOXtQwXL0diKUZTYikXF4lmJ0gmCXncfxbYT6henrasEJJsmOeup/jJYIB7Vkd22Y6GO9tUK5D1gGwKBgQCMzvids+cIYmx1KRUOipQaPOzkq7pMehhgmn7sMK5He0K4ZVpdsx43VCZQoHxVvJ7HM/+PwO3nmW22r4LB+jzWsMZdgZD8g2qr5ys0wYphOAgAjCvFnpHAZZaOu36dq792Qg/q/DS6wWUMfyWe2cmQRGIALqr2iM16TEw1Y5H/dQKBgBTZRKw5GftnjGcK69uGCkxH7FkPhIilt7ok626OqFiz1SXOF7DiYcGWeNCrytCT0P9qgIG8F+pmwwN+nPCNOMtVhZf1JBAJJLANbxKujULTqKJlvXqZ4K2T+LEjZcVR9B/YXJS9fNIV5fu/vHo98vbkh7T5eaznKtx2JSccOewnAoGAblcSA6KifLOEAht7YLW/cQAlMtxPVPaoe6sVoshTCbjRg+YIdjyShRDwJWZdiGISmk9pCKFKzJ4yl2HZuV/6pNJJ36RUlUv2H1c7SFARvDVIMAWnl2i3FmmFHbxXb/7SPj1uc9nHCEHciXppZJ2NkfvEQBhR6HczbY60eXHZSrECgYEA3UBnZcnevti5hLaevCviFloUWUwbB3hIbY423GepTTALhM+aS9x9A2INRRMbxiVMDzFMI0O8/wPEPR+ylJt+bHPNMtu8o4fEYpqB2U/hiTpKGsy2Zf1tj+mhNI5Ho9xGG0bukzXnfdE1Hc815jfOx1X0IRTBXbXurSln+xyO2zU=
+  # 支付宝公钥，通过应用公钥上传到支付宝开放平台换取支付宝公钥(如果是证书模式，公钥与私钥在CSR目录)。
+  publicKey: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAt9LX0mJCFQ5o963kVUU47KMgnx8MjQ14FR95cbORYr3JSxeCjSKloLQcnOD8PE5CZ45RYL0XUwSp/4GYlu7KtK1lYahq+TSLXM++EeOBYdxXj3Cg1EHTfgJIBRZBc+uhGpNe6DNxkM3QEHOk64cifz4UeFsQGDyyRHt0yCpmPwK3fSZHCe6XvijEenVOKLwaymLOc1MEII70ft1+WcIIOQn2JTnvwafM2iV2gDpi3FkNOFkLjGndVcAwaCM+dNbbNfUXD1F2gf6jaM76LIPA+SScS3QmO71933lziwqgyQvTxyqcId5xFTAot8BTGcwCRWxamWVYOwpKWCvp6xHaOQIDAQAB
+  # 应用公钥证书
+  appCertPath: xx
+  # 支付宝公钥证书 绝对路径吗
+  aliPayCertPath: xx
+  # 支付宝根证书
+  aliPayRootCertPath: xx
+  # 支付宝支付网关，沙箱环境时设置为 https://openapi.alipaydev.com/gateway.do 使用正式环境时设置为
+  serverUrl: https://openapi.alipay.com/gateway.do
+  # 外网访问项目的域名，支付通知中会使用
+  domain: xx

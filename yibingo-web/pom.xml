@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.yibingo.race</groupId>
+		<artifactId>yibingo</artifactId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>yibingo-web</artifactId>
+	<description>web模块</description>
+
+
+	<dependencies>
+		<dependency>
+			<groupId>com.yibingo.race</groupId>
+			<artifactId>yibingo-common</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.yibingo.race</groupId>
+			<artifactId>yibingo-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.yibingo.race</groupId>
+			<artifactId>yibingo-storage</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.yibingo.race</groupId>
+			<artifactId>yibingo-satoken</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.yibingo.race</groupId>
+			<artifactId>yibingo-quartz</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.yibingo.race</groupId>
+			<artifactId>yibingo-pay</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-spring</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.yibingo.race</groupId>
+			<artifactId>yibingo-img</artifactId>
+		</dependency>
+	</dependencies>
+
+
+</project>

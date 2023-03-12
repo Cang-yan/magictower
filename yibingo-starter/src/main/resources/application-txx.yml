@@ -1,0 +1,52 @@
+server:
+  #  tomcat:
+  #    uri-encoding: UTF-8
+  #    max-threads: 1000
+  #    min-spare-threads: 30
+  port: 8181
+  #  connection-timeout: 5000ms
+
+
+spring:
+  datasource:
+#    type: com.alibaba.druid.pool.DruidDataSource
+
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/meta_win?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: 120707938
+
+  redis:
+    host: 114.116.126.131
+    port: 6379
+    password:
+    #timeout: 6000ms  # 连接超时时长（毫秒）
+#    jedis:
+#      pool:
+#        max-active: 1000  # 连接池最大连接数（使用负值表示没有限制）
+#        max-wait: -1ms      # 连接池最大阻塞等待时间（使用负值表示没有限制）
+#        max-idle: 10      # 连接池中的最大空闲连接
+#        min-idle: 5       # 连接池中的最小空闲连接
+
+  rabbitmq:
+    host: 114.116.126.131
+    port: 5762
+    username: root
+    password: METAwin
+    virtual-host: /
+
+    listener:
+      simple:
+        concurrency: 10
+        max-concurrency: 10
+        prefetch: 1
+        auto-startup: true
+        default-requeue-rejected: true
+
+    template:
+      retry:
+        enabled: true
+        initial-interval: 1000
+        max-attempts: 3
+        max-interval: 10000
+        multiplier: 1.0
